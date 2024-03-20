@@ -8,15 +8,16 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 import shlex
 
+
 class State(BaseModel):
     """ State class """
     __tablename__ = "states"
-    name =  Column(String(128), nullable=False)
+    name = Column(String(128), nullable=False)
     cities = relationship("City", cascade='all, delete, delete-orphan',
                           backref="state")
 
     @property
-    def cities (self):
+    def cities(self):
         var = models.storage.all()
         lists = []
         result = []

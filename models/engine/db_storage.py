@@ -26,9 +26,9 @@ class DBStorage:
         host = getenv("HBNB_MYSQL_HOST")
         env = getenv("HBNB_ENV")
 
-        sel.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
-                                      .format(user, passwd, host, db),
-                                      pool_pre_ping=True)
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
+                                     .format(user, passwd, host, db),
+                                     pool_pre_ping=True)
         if env == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -44,11 +44,11 @@ class DBStorage:
                     dic[key] = x
             else:
                 lista = [State, City, User, Place, Review, Amenity]
-                for class in lists:
+                for clase in lists:
                     query = self.__session.query(clase)
                     for x in query:
                         key = "{}.{}".format(type(x.__name__.x.id))
-                                dic[key] = x
+                        dic[key] = x
             return (dic)
 
         def new(self, obj):
@@ -62,8 +62,8 @@ class DBStorage:
         def delete(self, obj=None):
             """delete an element in the table"""
             if obj:
-                self.session.delete(obj)
-        
+                self.__session.delete(obj)
+
         def reload(self):
             """configuration"""
             Base.metadata.create_all(self.__engine)
