@@ -7,13 +7,17 @@ from models.user import User
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
-from models.place import Place
 from models.review import Review
+from models.place import Place
 from os import getenv
 
 
-if getenv('HBNB_TYPE_STORAGE') == 'db':
+storage_type = getenv('HBNB_TYPE_STORAGE', 'file').lower()
+if storage_type == 'db':
     storage = DBStorage()
 else:
     storage = FileStorage()
-storage.reload()
+try:
+    storage.reload()
+except Exception as e:
+    print(f"Failed to reload data from storage: {e}")
