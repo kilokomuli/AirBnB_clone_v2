@@ -7,13 +7,12 @@ from fabric.api import local
 
 def do_pack():
     """generates a tgz archive"""
+    now = datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    name = "versions/web_static_{}.tgz".format(now)
     try:
-        now = datetime.now()
-        name = "web_static_{}{}{}{}{}{}.tgz".format(now.year, now.month,
-                                                    now.day, now.hour,
-                                                    now.minute, now.second)
-        local("mkdir -p versions")
-        local("tar -cvzf versions/{} web_static".format(archive_name))
-        return "versions/{}".format(archive_name)
-    except Exception as e:
+        local("mkdir -p ./versions")
+        local("tar --create --verbose -z --file={} ./web_static"
+              .format(name))
+        return name
+    except:
         return None
