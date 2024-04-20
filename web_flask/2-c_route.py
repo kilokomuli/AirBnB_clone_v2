@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Import flask class """
+"""Creates a flask appplication """
 
 
 from flask import Flask
@@ -19,9 +19,9 @@ def hbnb():
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def cisfun():
-    """returns C followed by the value of the text variable"""
-    return 'C' + text.replace('_', ' ')
+def cisfun(text):
+    """display “C ” followed by the value of the text variable"""
+    return 'C ' + text.replace('_', ' ')
 
 
 if __name__ == '__main__':
